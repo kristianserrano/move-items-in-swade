@@ -1,0 +1,39 @@
+{
+  "name": "move-items",
+  "title": "Move Items",
+  "description": "Move (rather than copy) items drag-and-dropped between SWADE Actor sheets.",
+  "authors": [
+    {
+      "name": "Kristian Serrano",
+      "email": "kristianserrano@gmail.com",
+      "url": "https://immaterialplane.com",
+      "discord": "Kristian Serrano#5077",
+      "twitter": "@KristianSerrano",
+      "reddit": "u/kristianserrano"
+    }
+  ],
+  "version": "1.0.0",
+  "compatibility": {
+    "minimum": 10,
+    "verified": 10,
+    "maximum": 10
+  },
+  "system": [
+    "swade"
+  ],
+  "relationships": {
+    "systems": [
+      {
+        "id": "swade",
+        "type": "system",
+        "manifest": "https://gitlab.com/api/v4/projects/16269883/packages/generic/swade/latest/system.json"
+      }
+    ]
+  },
+  "url": "This will be replaced",
+  "manifest": "This will be replaced",
+  "download": "This will be replaced",
+  "esmodules": [
+    "move-items.js"
+  ]
+}
