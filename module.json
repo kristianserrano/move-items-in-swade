@@ -1,6 +1,6 @@
 {
-  "name": "move-items",
-  "title": "Move Items",
+  "name": "move-items-in-swade",
+  "title": "Move Items in SWADE",
   "description": "Move (rather than copy) items drag-and-dropped between SWADE Actor sheets.",
   "authors": [
     {
@@ -34,6 +34,6 @@
   "manifest": "This will be replaced",
   "download": "This will be replaced",
   "esmodules": [
-    "move-items.js"
+    "move-items-in-swade.js"
   ]
 }
