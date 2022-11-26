@@ -30,10 +30,10 @@
       }
     ]
   },
+  "esmodules": [
+    "scripts/move-items-in-swade.js"
+  ],
   "url": "This will be replaced",
   "manifest": "This will be replaced",
-  "download": "This will be replaced",
-  "esmodules": [
-    "move-items-in-swade.js"
-  ]
+  "download": "This will be replaced"
 }
