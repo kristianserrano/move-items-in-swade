@@ -1,4 +1,4 @@
-Hooks.on('dropActorSheetData', (dragTarget, sheet, dragSource, user) => {
+Hooks.on('dropActorSheetData', async (dragTarget, sheet, dragSource, user) => {
 	const keysPressed = game.keyboard.downKeys;
 	const altPressed = keysPressed.has('AltLeft') || keysPressed.has('AltRight');
 	const isItemType = dragSource.type === "Item";
@@ -6,10 +6,10 @@ Hooks.on('dropActorSheetData', (dragTarget, sheet, dragSource, user) => {
 	const targetIsNotSelf = uuidsExist && !dragSource.uuid.startsWith(dragTarget.uuid) ? true : false;
 
 	if (!altPressed && isItemType && targetIsNotSelf) {
-		const dragSourceItem = fromUuid(dragSource.uuid);
+		const dragSourceItem = await fromUuid(dragSource.uuid);
 		if (dragSourceItem.parent) {
-			const item = fromUuid(dragSource.uuid);
-			Item.deleteDocuments([item.id], { parent: dragSourceItem.parent });
+			const item = await fromUuid(dragSource.uuid);
+			await Item.deleteDocuments([item.id], { parent: dragSourceItem.parent });
 		}
 	} else if (altPressed) {
 		keysPressed.clear();
