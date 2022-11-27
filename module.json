@@ -31,7 +31,7 @@
     ]
   },
   "esmodules": [
-    "scripts/move-items-in-swade.js"
+    "move-items-in-swade.js"
   ],
   "url": "This will be replaced",
   "manifest": "This will be replaced",
