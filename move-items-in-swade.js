@@ -1,4 +1,20 @@
-Hooks.on('dropActorSheetData', async (dragTarget, sheet, dragSource, user) => {
+
+async function mvi_decreaseSourceQuantity(dragSource) {
+	const item = await fromUuid(dragSource.uuid);
+	if (!!item.parent) {
+		if (item.system.quantity - 1 === 0) {
+			await item.delete();
+		} else {
+			item.update({ 'system.quantity': item.system.quantity - 1 });
+		}
+	}
+}
+
+async function mvi_adjustTargetQuantity(item, quantity) {
+	await item.update({ 'system.quantity': quantity });
+}
+
+Hooks.on('dropActorSheetData', (dragTarget, sheet, dragSource) => {
 	const keysPressed = game.keyboard.downKeys;
 	const altPressed = keysPressed.has('AltLeft') || keysPressed.has('AltRight');
 	const isItemType = dragSource.type === "Item";
@@ -6,12 +22,20 @@ Hooks.on('dropActorSheetData', async (dragTarget, sheet, dragSource, user) => {
 	const targetIsNotSelf = uuidsExist && !dragSource.uuid.startsWith(dragTarget.uuid) ? true : false;
 
 	if (!altPressed && isItemType && targetIsNotSelf) {
-		const dragSourceItem = await fromUuid(dragSource.uuid);
-		if (dragSourceItem.parent) {
-			const item = await fromUuid(dragSource.uuid);
-			await Item.deleteDocuments([item.id], { parent: dragSourceItem.parent });
-		}
+		mvi_decreaseSourceQuantity(dragSource);
 	} else if (altPressed) {
 		keysPressed.clear();
+	}
+});
+Hooks.on('preCreateItem', (document, data, user) => {
+	const matchingItems = document.actor.items.filter((i) => i.name === data.name);
+	const existingItem = document.actor.items.find((i) => i.name === data.name && i.id !== document.id);
+	if (!!existingItem) {
+		existingItem.update({ 'system.quantity': existingItem.system.quantity + 1 });
+		//mvi_adjustTargetQuantity(document, existingItem.system.quantity + 1);
+		return false;
+	} else {
+		document.updateSource({ 'system.quantity': 1 });
+		//mvi_adjustTargetQuantity(document, 1)
 	}
 });
