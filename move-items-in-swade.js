@@ -17,7 +17,7 @@ Hooks.on('dropActorSheetData', (dragTarget, sheet, dragSource) => {
 	const uuidsExist = !!dragSource.uuid && !!dragTarget.uuid;
 	const targetIsNotSelf = uuidsExist && !dragSource.uuid.startsWith(dragTarget.uuid) ? true : false;
 
-	if (!altPressed && isItemType && targetIsNotSelf) {
+	if (altPressed && isItemType && targetIsNotSelf) {
 		mvi_decreaseSourceQuantity(dragSource);
 	}
 });
@@ -25,7 +25,7 @@ Hooks.on('dropActorSheetData', (dragTarget, sheet, dragSource) => {
 Hooks.on('preCreateItem', (document, data, user) => {
 	const keysPressed = game.keyboard.downKeys;
 	const altPressed = keysPressed.has('AltLeft') || keysPressed.has('AltRight');
-	if (!altPressed) {
+	if (altPressed) {
 		const existingItem = document.actor.items.find((i) => i.name === data.name && i.id !== document.id);
 		if (!!existingItem) {
 			existingItem.update({ 'system.quantity': existingItem.system.quantity + 1 });
@@ -33,7 +33,5 @@ Hooks.on('preCreateItem', (document, data, user) => {
 		} else {
 			document.updateSource({ 'system.quantity': 1 });
 		}
-	} else if (altPressed) {
-		keysPressed.clear();
 	}
 });
