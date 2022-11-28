@@ -31,10 +31,8 @@ Hooks.on('preCreateItem', (document, data, user) => {
 	const existingItem = document.actor.items.find((i) => i.name === data.name && i.id !== document.id);
 	if (!!existingItem) {
 		existingItem.update({ 'system.quantity': existingItem.system.quantity + 1 });
-		//mvi_adjustTargetQuantity(document, existingItem.system.quantity + 1);
 		return false;
 	} else {
 		document.updateSource({ 'system.quantity': 1 });
-		//mvi_adjustTargetQuantity(document, 1)
 	}
 });
