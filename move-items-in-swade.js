@@ -1,11 +1,16 @@
 
-async function mvi_decreaseSourceQuantity(dragSource) {
+async function mvi_decreaseSourceQuantity(dragSource, dragTarget) {
 	const item = await fromUuid(dragSource.uuid);
+	const target = await fromUuid(dragTarget.uuid);
 	if (!!item.parent) {
-		if (item.system.quantity - 1 === 0) {
-			await item.delete();
+		if (target.isOwner) {
+			if (item.system.quantity - 1 === 0) {
+				await item.delete();
+			} else {
+				await item.update({ 'system.quantity': item.system.quantity - 1 });
+			}
 		} else {
-			await item.update({ 'system.quantity': item.system.quantity - 1 });
+			ui.notifications.warn(`You do not have permission to edit this character's inventory.`);
 		}
 	}
 }
@@ -18,7 +23,7 @@ Hooks.on('dropActorSheetData', (dragTarget, sheet, dragSource) => {
 	const targetIsNotSelf = uuidsExist && !dragSource.uuid.startsWith(dragTarget.uuid) ? true : false;
 
 	if (altPressed && isItemType && targetIsNotSelf) {
-		mvi_decreaseSourceQuantity(dragSource);
+		mvi_decreaseSourceQuantity(dragSource, dragTarget);
 	}
 });
 
