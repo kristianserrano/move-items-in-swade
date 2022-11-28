@@ -1,5 +1,9 @@
 # Move Items in SWADE
 
+## v1.1.1
+
+- Prevents script from decreasing source Item quantities if user does not own the target Actor. Also displays notification indicating the user does not have ownership of the target Actor.
+
 ## v1.1.0
 
 - Reverses the Alt/Option key logic so that the module respects default Foundry VTT behavior. Pressing Alt while dragging now activates the module's functionality.
