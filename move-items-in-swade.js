@@ -5,7 +5,7 @@ async function mvi_decreaseSourceQuantity(dragSource) {
 		if (item.system.quantity - 1 === 0) {
 			await item.delete();
 		} else {
-			item.update({ 'system.quantity': item.system.quantity - 1 });
+			await item.update({ 'system.quantity': item.system.quantity - 1 });
 		}
 	}
 }
@@ -28,7 +28,6 @@ Hooks.on('dropActorSheetData', (dragTarget, sheet, dragSource) => {
 	}
 });
 Hooks.on('preCreateItem', (document, data, user) => {
-	const matchingItems = document.actor.items.filter((i) => i.name === data.name);
 	const existingItem = document.actor.items.find((i) => i.name === data.name && i.id !== document.id);
 	if (!!existingItem) {
 		existingItem.update({ 'system.quantity': existingItem.system.quantity + 1 });
