@@ -1,5 +1,9 @@
 # Move Items in SWADE
 
+## v1.1.2
+
+- Fixes packaging script.
+
 ## v1.1.1
 
 - Prevents script from decreasing source Item quantities if user does not own the target Actor. Also displays notification indicating the user does not have ownership of the target Actor.
