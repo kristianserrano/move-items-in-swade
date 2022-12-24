@@ -33,6 +33,13 @@
   "esmodules": [
     "move-items-in-swade.js"
   ],
+  "languages": [
+    {
+      "lang": "en",
+      "name": "English",
+      "path": "languages/en.json"
+    }
+  ],
   "url": "This will be replaced",
   "manifest": "This will be replaced",
   "download": "This will be replaced"
