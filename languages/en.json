@@ -1,0 +1,11 @@
+{
+    "MOVE_ITEMS": {
+        "QuantityDialogTitle": "Moving {name}",
+        "HowManyItems": "How many would you like to move?",
+        "Cancel": "Cancel",
+        "MoveX": "Move Items",
+        "MoveAll": "Move All Items",
+        "QuantityNotAvailable": "You cannot move more items than available.",
+        "NoOwnership": "You do not have permission to edit this character's inventory."
+    }
+}
